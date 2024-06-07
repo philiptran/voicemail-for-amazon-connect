@@ -73,7 +73,8 @@ public class KVSProcessRecordingLambda implements RequestHandler<KinesisEvent, S
                 traceRecord.getContactId(),
                 traceRecord.getCustomerEndpoint().getAddress(),
                 new DynamoDB(builder.build()),
-                logRecordsFlag
+                logRecordsFlag,
+                traceRecord.getAttributes().getContactFlowName()
         );
 
         AudioStreamService streamingService = new AudioStreamService(transcribeService, contactVoicemailRepo);

@@ -56,7 +56,7 @@ class NotificationService {
         let contactEmail = connectAgent.connectUser.email || connectAgent.connectUser.username; // For SSO instances
         let agentSMSPhoneNumber = deliveryOptions.sms.phoneNumber;
         let deliveryEmail = globalSettings.deliveryEmail;
-
+        
         if (!deliveryEmail) {
             throw "You must provide a delivery email";
         }
@@ -133,10 +133,11 @@ class NotificationService {
     sendMail(voicemail, fromEmailAddress, toEmailAddress, deliveryContent) {
         return new Promise((resolve, reject) => {
             let voicemailDate = new Date(voicemail.timestamp * 1000);
+            let subject = `New voicemail from ${voicemail.contactPhoneNumber} for call flow '${voicemail.contactFlowName}'`;
 
             // Date
             let html = `<p>${voicemailDate}</p>`;
-            html += `<p>New voicemail from ${voicemail.contactPhoneNumber}.</p>`;
+            html += `<p>${subject}}'</p>`;
 
             // Transcript
             if (deliveryContent.transcription) {
@@ -157,7 +158,7 @@ class NotificationService {
 
             let mailOptions = {
                 from: fromEmailAddress,
-                subject: `New voicemail from ${voicemail.contactPhoneNumber}`,
+                subject: `${subject}`,
                 html,
                 to: toEmailAddress
             };
@@ -171,6 +172,8 @@ class NotificationService {
             }
 
             this.transporter.sendMail(mailOptions, (err, info) => {
+                console.log(`mailOptions: `, mailOptions);
+                //
                 if (err) {
                     console.log(err);
                     reject(err);
@@ -188,9 +191,8 @@ class NotificationService {
      * @param {DeliveryContent} deliveryContent
      */
     sendTextMessage(voicemail, deliveryPhoneNumber, deliveryContent) {
-        return new Promise((resolve, reject) => {
-
-            let message = `Amazon Connect voicemail from ${voicemail.contactPhoneNumber}\n`;
+        return new Promise((resolve, reject) => { 
+            let message = `Amazon Connect voicemail from ${voicemail.contactPhoneNumber} for call flow '${voicemail.contactFlowName}'\n`;
 
             // Transcript
             if (deliveryContent.transcription) {

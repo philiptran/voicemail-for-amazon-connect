@@ -26,14 +26,16 @@ public class ContactVoicemailRepo {
     private String contactPhoneNumber;
     private DynamoDB ddbClient;
     private Boolean logRecordsFlag;
+    private String contactFlowName;
     private static final String CONTACT_VOICEMAIL_TABLE_NAME = System.getenv("CONTACT_VOICEMAIL_TABLE_NAME");
     private static final Logger logger = LoggerFactory.getLogger(ContactVoicemailRepo.class);
 
-    public ContactVoicemailRepo(String contactId, String contactPhoneNumber, DynamoDB ddbClient, Boolean logRecordsFlag) {
+    public ContactVoicemailRepo(String contactId, String contactPhoneNumber, DynamoDB ddbClient, Boolean logRecordsFlag, String contactFlowName) {
         this.contactId = contactId;
         this.contactPhoneNumber = contactPhoneNumber;
         this.ddbClient = ddbClient;
         this.logRecordsFlag = logRecordsFlag;
+        this.contactFlowName = contactFlowName;
     }
 
     public DynamoDB getDdbClient() {
@@ -50,6 +52,7 @@ public class ContactVoicemailRepo {
                 .withString("contactPhoneNumber", contactPhoneNumber)
                 .withString("assigneeId", agentId)
                 .withKeyComponent("readerId", agentId)
+                .withString("contactFlowName", contactFlowName)
                 .withBoolean("shouldTranscribe", shouldTranscribe)
                 .withBoolean("shouldEncrypt", shouldEncrypt)
                 .withString("recordingUrl", uploadInfo.getResourceUrl())
@@ -70,12 +73,12 @@ public class ContactVoicemailRepo {
         }
 
         if (logRecordsFlag) {
-            logger.info(String.format("Record: %s %d %b %b",
+            logger.info(String.format("Record: %s %d %b %b %s",
                     contactId,
                     timestamp,
                     shouldTranscribe,
-                    shouldEncrypt));
+                    shouldEncrypt,
+                    contactFlowName));
         }
     }
-
 }

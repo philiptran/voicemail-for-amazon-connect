@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "build": "webpack && mvn clean package",
+        "build": "export NODE_OPTIONS=--openssl-legacy-provider && webpack && mvn clean package",
         "info:dev": "sls info --verbose --stage dev --region us-west-2 | node tools/process-output.js ",
         "deploy:dev": "npm run build && sls deploy --stage dev --region us-west-2 && npm run info:dev",
         "test": "jest tests/*.test.js --config jest.config.js"
@@ -47,7 +47,7 @@
         "serverless-offline": "^9.2.6",
         "serverless-prune-plugin": "^2.0.1",
         "serverless-webpack": "^5.9.0",
-        "webpack": "^4.19.1",
+        "webpack": "^4.47.0",
         "webpack-cli": "^3.3.11",
         "webpack-node-externals": "^1.7.2"
     },

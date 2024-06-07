@@ -29,6 +29,7 @@ public class ContactFlowAttributes {
     private boolean transcribeVoicemail;
 
     private Optional<String> languageCode;
+    private Optional<String> contactFlowName;
 
     public ContactFlowAttributes(JSONObject jsonObject) {
         this.agentId = jsonObject.getString("agentId");
@@ -42,6 +43,11 @@ public class ContactFlowAttributes {
             this.languageCode = Optional.of(jsonObject.getString("languageCode"));
         } else {
             this.languageCode = Optional.of("en-US");
+        }
+        if (jsonObject.has("contactFlowName")) {
+            this.contactFlowName = Optional.of(jsonObject.getString("contactFlowName"));
+        } else {
+            this.contactFlowName = Optional.of("contactFlowName-missing");
         }
 
     }
@@ -80,5 +86,9 @@ public class ContactFlowAttributes {
 
     public Optional<String> getLanguageCode() {
         return languageCode;
+    }
+
+    public String getContactFlowName() {
+        return contactFlowName.get();
     }
 }

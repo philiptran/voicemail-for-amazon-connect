@@ -25,6 +25,7 @@ class ContactVoicemail {
         this.recordingBucketName = voicemailMap["recordingBucketName"];
         this.recordingObjectKey = voicemailMap["recordingObjectKey"];
         this.recordingBucketRegion = voicemailMap["recordingBucketRegion"];
+        this.contactFlowName = voicemailMap["contactFlowName"];
     }
 
     getTranscriptJobName() {

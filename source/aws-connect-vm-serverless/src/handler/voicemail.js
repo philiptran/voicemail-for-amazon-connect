@@ -37,6 +37,7 @@ const voicemailService = new ContactVoicemailService(
 exports.stream = async (event, context) => {
     let {Records} = event;
     let promises = Records.map(async (record) => {
+        console.log(`Record: `, record);
         let eventName = record.eventName;
         let newRecord = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
         let oldRecord = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.OldImage);
