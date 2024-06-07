@@ -53,7 +53,7 @@ serverless package
 Update the first Lambda function `KvsProcessRecording`:
 
 1. Open the Lambda console and find the Lambda function containing this string `KvsProcessRecording`.
-2. Click on the Lambda function to open it.
+2. Click the Lambda function to open it.
 3. Under the Code tab, click `Upload from` and choose `.zip or .jar file`.
 4. In the pop-up window, click `Upload` and choose the `aws-connect-vm-java.jar` from the `target` folder created by your build above.
 5. Click `Save` to save the changes.
@@ -61,9 +61,9 @@ Update the first Lambda function `KvsProcessRecording`:
 Update the second Lambda function `ContactVoicemailStream`:
 
 1. Open the Lambda console and find the Lambda function containing this string `ContactVoicemailStream`.
-2. Click on the Lambda function to open it.
+2. Click the Lambda function to open it.
 3. Under the Code tab, click `Upload from` and choose `.zip file`.
-4. In the pop-up window, click `Upload` and choose the `aws-connect-vm.zip` from the `.serverless` folder created by your build above. If you cannot see hidden `.serverless` folder, use the File Explorer to copy the `aws-connect-vm.zip` to your Downloads folder to upload to the Lambda function.
+4. In the pop-up window, click `Upload` and choose the `aws-connect-vm.zip` from the `.serverless` folder created by your build above. If you cannot see the hidden `.serverless` folder, use the File Explorer to copy the `aws-connect-vm.zip` to your Downloads folder. Repeat step 3 to upload the zip file from the `Downloads` folder instead.
 5. Click `Save` to save the changes.
 
 
@@ -77,13 +77,13 @@ Update the second Lambda function `ContactVoicemailStream`:
 | contactFlowName | [your own value] |
 
 3. Click `Save` to save the changes.
-4. Click on `Save` and then `Publish` to publish the changes to the contact flow.
+4. Click `Save` and then click `Publish` to publish the changes to the contact flow.
 
 ## Verification and testing
 
 1. Make a test call and leave a voicemail message.
 2. Check the CloudWatch logs for the `ContactVoicemailStream` function.
-3. Find the `mailOptions:` log entry to see the details of the email notification that is sent to the manager's email address.
+3. Find the `mailOptions` log entry to see the details of the email notification that is sent to the manager's email address.
 4. Manager should have also received an email notification if the email address has been verified and confirmed in Amazon SES.
 
 
