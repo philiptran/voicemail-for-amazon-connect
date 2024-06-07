@@ -137,7 +137,7 @@ class NotificationService {
 
             // Date
             let html = `<p>${voicemailDate}</p>`;
-            html += `<p>${subject}}'</p>`;
+            html += `<p>${subject}'</p>`;
 
             // Transcript
             if (deliveryContent.transcription) {
