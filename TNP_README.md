@@ -1,6 +1,6 @@
-# Ad-hoc re-build the project and update to Lambda functions that are already deployed using the CloudFormation stack
+# Rebuild the project and update to existing Lambda functions
 
-Note: this is just a quick hack to re-build the code and update the 2 key Lambda functions: `XX-ContactVoicemailStreamXXX` and `XX-KvsProcessRecordingXX`
+Note: this is just a quick hack to re-build the code and update the 2 key Lambda functions: `XX-ContactVoicemailStreamXXX` and `XX-KvsProcessRecordingXX` that are already deployed in your AWS account using the CloudFormation stack.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ mvn --version
 
 ## Build the project
 
-Check that you are still in the `voicemail-for-amazon-connect/source/aws-connect-vm-serverless/` folder. Use `cd` command to go to the `aws-connect-vm-serverless` if required.
+Check that you are still in the `voicemail-for-amazon-connect/source/aws-connect-vm-serverless/` folder. Use `cd` command to go to the `aws-connect-vm-serverless` folder if required.
 
 Run `npm run build` to build the Java code and generate the bundle `aws-connect-vm-java.jar` file in the `target` folder. This command also generates the minimised packages for NodeJS codes in the `handler` folder.
 
@@ -42,11 +42,15 @@ npm run build
 
 Run `serverless package` to package the NodeJS code and generate the `aws-connect-vm.zip` file in a hidden folder `.serverless`.
 
+```
+serverless package
+```
+
 ## Deploy the changes to your existing Lambda functions
 
 **Important**: Make sure to test the changes in your UAT environment before promoting the changes to Production!
 
-Update the first Lambda function `KvsProcessRecording`
+Update the first Lambda function `KvsProcessRecording`:
 
 1. Open the Lambda console and find the Lambda function containing this string `KvsProcessRecording`.
 2. Click on the Lambda function to open it.
@@ -54,7 +58,7 @@ Update the first Lambda function `KvsProcessRecording`
 4. In the pop-up window, click `Upload` and choose the `aws-connect-vm-java.jar` from the `target` folder created by your build above.
 5. Click `Save` to save the changes.
 
-Update the second Lambda function `ContactVoicemailStream`
+Update the second Lambda function `ContactVoicemailStream`:
 
 1. Open the Lambda console and find the Lambda function containing this string `ContactVoicemailStream`.
 2. Click on the Lambda function to open it.
