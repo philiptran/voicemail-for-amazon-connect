@@ -67,7 +67,9 @@ Update the second Lambda function `ContactVoicemailStream`:
 5. Click `Save` to save the changes.
 
 
-## Add the `contactFlowName` contact attribute to your contact flow that uses the Voicemail feature
+## Add the `contactFlowName` contact attribute to your contact flow
+
+Add a new contact attribute, `contactFlowName` to your contact flow that uses the Voicemail feature. This `contactFlowName` will be used in the subject and body of the email notification sent to the manager's email address.
 
 1. Open the contact flow that uses the customer queue for Voicemail
 2. Use `Set contact attributes` block to add a new User defined attribute as follow.
